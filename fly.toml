@@ -1,0 +1,29 @@
+# fly.toml app configuration file generated for hearth-batch on 2025-01-25T01:35:36+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'hearth-batch'
+primary_region = 'iad'
+
+[build]
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[env]
+  FREQUENCY=10
+  MAX_ATTEMPTS=3
+
+[deploy]
+  release_command = "npm run db:prod:migrate"

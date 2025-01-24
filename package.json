@@ -30,8 +30,9 @@
   },
   "homepage": "https://github.com/mojitoj/hearth-batch#readme",
   "dependencies": {
-    "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.4",
+    "drizzle-kit": "^0.30.2",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "morgan": "^1.10.0",
     "pg": "^8.13.1",
@@ -39,7 +40,6 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.30.2",
     "jest": "^29.7.0",
     "nock": "^13.5.6",
     "supertest": "^7.0.0"
