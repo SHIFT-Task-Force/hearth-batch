@@ -9,10 +9,13 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms * 1000));
 async function main() {
   while (true) {
     const job = await nextJob();
+    console.log("job in worker main", job);
     if (!job) {
       await sleep(process.env.FREQUENCY || 10);
+    } else {
+      console.log("processing job", job);
+      await processJob(job);
     }
-    await processJob(job);
   }
 }
 
