@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS "jobs";
+
 CREATE TABLE "jobs" (
 	"id" varchar PRIMARY KEY NOT NULL,
 	"status" varchar DEFAULT 'PENDING',
