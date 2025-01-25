@@ -1,5 +1,5 @@
 {
-  "id": "3122caaa-6901-4eca-8a37-0facc372b9c3",
+  "id": "b446118a-fb2a-4ac0-a0de-4626e22e7f48",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -18,7 +18,8 @@
           "name": "status",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "'PENDING'"
         },
         "attempts": {
           "name": "attempts",
@@ -26,6 +27,12 @@
           "primaryKey": false,
           "notNull": false,
           "default": 0
+        },
+        "errors": {
+          "name": "errors",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "createdAt": {
           "name": "createdAt",

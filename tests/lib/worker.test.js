@@ -14,14 +14,12 @@ const FHIR_SERVER = nock(FHIR_SERVER_BASE);
 it("happy path", async () => {
   await db.insert(jobs).values({
     id: "1",
-    status: STATUS.PENDING,
     fhir_base: FHIR_SERVER_BASE,
     resource_id: "Observation/1"
   });
 
   await db.insert(jobs).values({
     id: "2",
-    status: STATUS.PENDING,
     fhir_base: FHIR_SERVER_BASE,
     resource_id: "Observation/2",
     payload: {
@@ -58,14 +56,12 @@ it("happy path", async () => {
 it("error path", async () => {
   await db.insert(jobs).values({
     id: "3",
-    status: STATUS.PENDING,
     fhir_base: FHIR_SERVER_BASE,
     resource_id: "Observation/3"
   });
 
   await db.insert(jobs).values({
     id: "4",
-    status: STATUS.PENDING,
     fhir_base: FHIR_SERVER_BASE,
     resource_id: "Observation/4",
     payload: {

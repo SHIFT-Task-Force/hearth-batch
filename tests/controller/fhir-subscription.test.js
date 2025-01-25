@@ -2,7 +2,7 @@ const request = require("supertest");
 const { eq, and } = require("drizzle-orm");
 const { app } = require("../../app");
 const { db } = require("../../lib/db");
-const { jobs } = require("../../db-schema/jobs");
+const { jobs, STATUS } = require("../../db-schema/jobs");
 
 const ID_ONLY = require("../fixtures/subscription-notification-id-only.json");
 const FULL = require("../fixtures/subscription-notification-full.json");
@@ -25,6 +25,7 @@ it("process id only bundle", async () => {
       )
     );
   expect(job.length).toEqual(1);
+  expect(job[0].status).toEqual(STATUS.PENDING);
 });
 
 it("process full bundle", async () => {
@@ -43,4 +44,5 @@ it("process full bundle", async () => {
       )
     );
   expect(job.length).toEqual(1);
+  expect(job[0].status).toEqual(STATUS.PENDING);
 });

@@ -20,7 +20,7 @@ const jobs = pgTable(
   "jobs",
   {
     id: varchar().primaryKey(),
-    status: varchar(),
+    status: varchar().default(STATUS.PENDING),
     attempts: integer().default(0),
     errors: text(),
     createdAt: timestamp().notNull().defaultNow(),
