@@ -1,3 +1,5 @@
+require("dotenv").config({ path: `.env.${process.env.NODE_ENV || "dev"}` });
+
 const { nextJob, processJob } = require("./lib/worker");
 
 console.log(
@@ -13,7 +15,6 @@ async function main() {
     if (!job) {
       await sleep(process.env.FREQUENCY || 10);
     } else {
-      console.log("processing job", job);
       await processJob(job);
     }
   }
