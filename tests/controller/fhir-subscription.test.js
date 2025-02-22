@@ -14,13 +14,13 @@ it("process id only bundle", async () => {
     .set("Accept", "application/json")
     .send(ID_ONLY);
 
-  expect(res.status).toEqual(200);
+  expect(res.status).toEqual(204);
   const job = await db
     .select()
     .from(jobs)
     .where(
       and(
-        eq(jobs.fhir_base, "https://example.org/FHIR/R5"),
+        eq(jobs.fhir_base, process.env.FHIR_SERVER_BASE),
         eq(jobs.resource_id, "Encounter/2")
       )
     );
@@ -33,13 +33,13 @@ it("process full bundle", async () => {
     .post(PATH)
     .set("Accept", "application/json")
     .send(FULL);
-  expect(res.status).toEqual(200);
+  expect(res.status).toEqual(204);
   const job = await db
     .select()
     .from(jobs)
     .where(
       and(
-        eq(jobs.fhir_base, "https://example.org/FHIR/R5"),
+        eq(jobs.fhir_base, process.env.FHIR_SERVER_BASE),
         eq(jobs.resource_id, "Encounter/2")
       )
     );

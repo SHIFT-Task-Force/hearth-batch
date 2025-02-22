@@ -12,7 +12,7 @@ app.set("trust proxy", true);
 
 //middlewares
 process.env.NODE_ENV === "production" || app.use(morgan("dev"));
-app.use(express.json({ type: "application/json" }));
+app.use(express.json({ type: ["application/json", "application/fhir+json"] }));
 
 //routes
 app.post("/fhir-subscription", FHIRSubscription.post);
