@@ -12,7 +12,6 @@ async function main() {
   while (true) {
     const job = await nextJob();
     if (job) {
-      console.log(job);
       await processJob(job);
     } else {
       await sleep(process.env.FREQUENCY || 10);
