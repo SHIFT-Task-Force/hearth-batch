@@ -24,6 +24,7 @@ primary_region = 'iad'
 [env]
   FREQUENCY=10
   MAX_ATTEMPTS=3
+  FHIR_SERVER_BASE='https://shift-task-force-hapi-703.fly.dev/fhir'
 
 [deploy]
   release_command = "npm run db:prod:migrate"
