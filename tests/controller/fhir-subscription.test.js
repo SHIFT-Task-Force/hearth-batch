@@ -24,8 +24,12 @@ it("process id only bundle", async () => {
         eq(jobs.resource_id, "Encounter/2")
       )
     );
+
   expect(job.length).toEqual(1);
   expect(job[0].status).toEqual(STATUS.PENDING);
+
+  // remove job
+  await db.delete(jobs).where(eq(jobs.id, job[0].id));
 });
 
 it("process full bundle", async () => {
@@ -43,6 +47,10 @@ it("process full bundle", async () => {
         eq(jobs.resource_id, "Encounter/2")
       )
     );
+
   expect(job.length).toEqual(1);
   expect(job[0].status).toEqual(STATUS.PENDING);
+
+  // remove job
+  await db.delete(jobs).where(eq(jobs.id, job[0].id));
 });

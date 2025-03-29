@@ -25,6 +25,7 @@ primary_region = 'iad'
   FREQUENCY=10
   MAX_ATTEMPTS=3
   FHIR_SERVER_BASE='https://shift-task-force-hapi-703.fly.dev/fhir'
+  FHIR_SERVER_TYPE='medplum'
 
 [deploy]
   release_command = "npm run db:prod:migrate"
