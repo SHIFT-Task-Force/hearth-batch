@@ -9,7 +9,7 @@ async function post(req, res, next) {
     // get body and tell if it is a bundle or a single resource
     const body = req.body;
     let jobs = [];
-    console.log("Registered jobs");
+
     if (body.resourceType == "Bundle") {
       jobs = extractJobs(body);
     } else {
