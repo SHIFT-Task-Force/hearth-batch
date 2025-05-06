@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { eq, and } = require("drizzle-orm");
+const { eq, and, sql } = require("drizzle-orm");
 const { app } = require("../../app");
 const { db } = require("../../lib/db");
 const { jobs, STATUS } = require("../../db-schema/jobs");
@@ -7,6 +7,10 @@ const { jobs, STATUS } = require("../../db-schema/jobs");
 const ID_ONLY = require("../fixtures/subscription-notification-id-only.json");
 const FULL = require("../fixtures/subscription-notification-full.json");
 const PATH = "/fhir-subscription";
+
+afterEach(async () => {
+  await db.execute(sql`truncate table jobs;`);
+});
 
 it("process id only bundle", async () => {
   const res = await request(app)
@@ -27,9 +31,6 @@ it("process id only bundle", async () => {
 
   expect(job.length).toEqual(1);
   expect(job[0].status).toEqual(STATUS.PENDING);
-
-  // remove job
-  await db.delete(jobs).where(eq(jobs.id, job[0].id));
 });
 
 it("process full bundle", async () => {
@@ -50,7 +51,4 @@ it("process full bundle", async () => {
 
   expect(job.length).toEqual(1);
   expect(job[0].status).toEqual(STATUS.PENDING);
-
-  // remove job
-  await db.delete(jobs).where(eq(jobs.id, job[0].id));
 });

@@ -1,5 +1,5 @@
 const nock = require("nock");
-const { eq, and } = require("drizzle-orm");
+const { eq, and, sql } = require("drizzle-orm");
 
 const { db } = require("../../lib/db");
 const { jobs, STATUS } = require("../../db-schema/jobs");
@@ -10,6 +10,10 @@ const SLS_SERVER_URL = new URL(process.env.SLS_ENDPOINT);
 
 const SLS_SERVER = nock(SLS_SERVER_URL.origin);
 const FHIR_SERVER = nock(FHIR_SERVER_BASE);
+
+afterEach(async () => {
+  await db.execute(sql`truncate table jobs;`);
+});
 
 it("happy path", async () => {
   await db.insert(jobs).values({
@@ -49,6 +53,10 @@ it("happy path", async () => {
     .select()
     .from(jobs)
     .where(eq(jobs.status, STATUS.COMPLETED));
+
+  const allJobs = await db.select().from(jobs);
+
+  console.log(allJobs);
 
   expect(processedJobs.length).toEqual(2);
 });
